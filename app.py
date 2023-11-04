@@ -3,6 +3,10 @@ from fileinput import filename
 from distutils.log import debug
 import numpy as np
 import ezdxf as ez
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import plotly.express as px
 import os
 from werkzeug.utils import secure_filename
 
@@ -21,10 +25,10 @@ def allowed_file(filename):
 def get_points_from_start_to_end(e, standard_point_scale):
   st = np.array([e.dxf.start.x, e.dxf.start.y, 0])
   ed = np.array([e.dxf.end.x, e.dxf.end.y, 0])
-  st2 = np.array([e.dxf.start.x, e.dxf.start.y, 393.7])
-  ed2 = np.array([e.dxf.end.x, e.dxf.end.y, 393.7])
-  st3 = np.array([e.dxf.start.x, e.dxf.start.y, 236.22])
-  ed3 = np.array([e.dxf.end.x, e.dxf.end.y, 236.22])
+  st2 = np.array([e.dxf.start.x, e.dxf.start.y, 131.23])
+  ed2 = np.array([e.dxf.end.x, e.dxf.end.y, 131.23])
+  st3 = np.array([e.dxf.start.x, e.dxf.start.y, 78.74])
+  ed3 = np.array([e.dxf.end.x, e.dxf.end.y, 78.74])
 
   dist_btw = np.linalg.norm(ed - st)
   dist_btw2 = np.linalg.norm(ed2 - st2)
@@ -59,7 +63,7 @@ def generate_point_cloud(dxfFile, name):
     print("Invalid or corrupted DXF file.")
     return
   msp = doc.modelspace()
-  standard_point_scale = 3
+  standard_point_scale = 30
   labels = []
 
   cloud_point_array = []
@@ -83,8 +87,15 @@ def generate_point_cloud(dxfFile, name):
 
   pointCloud = np.asarray(cloud_point_array)
   pointCloudMeters = (pointCloud * 0.0254)
+  df = pd.DataFrame(pointCloudMeters, columns = ['X','Y','Z'])
+  x_min = df['X'].min()
+  y_min = df['Y'].min()
+  df['X'] -= x_min
+  df['Y'] -= y_min
   pointCloudName = name + ".xyz"
   np.savetxt("tmp/" + pointCloudName, pointCloudMeters)
+  fig = px.scatter_3d(df, x='X', y='Y', z='Z', color='Z', title=name)
+  fig.write_html ("templates/pc.html")
   return pointCloudName
 
 
@@ -104,9 +115,11 @@ def success(name):
   file = os.path.join(app.config['UPLOAD_FOLDER'], name)
   base, ext = os.path.splitext(name)
   pointCloudName = generate_point_cloud(file, base)
+  
   return render_template("Acknowledgement.html",
                          name=name,
-                         pointCloudName=pointCloudName)
+                         pointCloudName=pointCloudName,
+                        )
 
 
 @app.route("/download/<pointCloudName>")

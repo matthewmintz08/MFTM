@@ -97,24 +97,6 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7
 
 [[package]]
 name = "contourpy"
-version = "1.1.0"
-description = "Python library for calculating contours of 2D quadrilateral grids"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-
-[package.dependencies]
-numpy = ">=1.16"
-
-[package.extras]
-docs = ["furo", "sphinx-copybutton"]
-bokeh = ["bokeh", "selenium"]
-mypy = ["contourpy", "docutils-stubs", "mypy (==1.2.0)", "types-pillow"]
-test = ["contourpy", "matplotlib", "pillow"]
-test-no-images = ["pytest", "pytest-cov", "wurlitzer"]
-
-[[package]]
-name = "contourpy"
 version = "1.1.1"
 description = "Python library for calculating contours of 2D quadrilateral grids"
 category = "main"
@@ -130,6 +112,24 @@ bokeh = ["bokeh", "selenium"]
 mypy = ["contourpy", "docutils-stubs", "mypy (==1.4.1)", "types-pillow"]
 test = ["contourpy", "matplotlib", "pillow"]
 test-no-images = ["pytest", "pytest-cov", "wurlitzer"]
+
+[[package]]
+name = "contourpy"
+version = "1.2.0"
+description = "Python library for calculating contours of 2D quadrilateral grids"
+category = "main"
+optional = false
+python-versions = ">=3.9"
+
+[package.dependencies]
+numpy = ">=1.20,<2.0"
+
+[package.extras]
+docs = ["furo", "sphinx (>=7.2)", "sphinx-copybutton"]
+bokeh = ["bokeh", "selenium"]
+mypy = ["contourpy", "docutils-stubs", "mypy (==1.6.1)", "types-pillow"]
+test = ["contourpy", "matplotlib", "pillow"]
+test-no-images = ["pytest", "pytest-cov", "pytest-xdist", "wurlitzer"]
 
 [[package]]
 name = "cycler"
@@ -320,6 +320,14 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "pandas2"
+version = "0.0.0"
+description = "pandas2"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pillow"
 version = "10.1.0"
 description = "Python Imaging Library (Fork)"
@@ -342,6 +350,26 @@ python-versions = ">=3.7"
 [package.extras]
 docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx-autodoc-typehints (>=1.24)", "sphinx (>=7.1.1)"]
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "pytest (>=7.4)"]
+
+[[package]]
+name = "plotly"
+version = "5.18.0"
+description = "An open-source, interactive data visualization library for Python"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+packaging = "*"
+tenacity = ">=6.2.0"
+
+[[package]]
+name = "plotter"
+version = "1.3.20"
+description = "Plotting library with descriptive approach"
+category = "main"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "pooch"
@@ -449,6 +477,17 @@ description = "SQLite4 provides a simplified wrapper for SQLite3, along with bui
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "tenacity"
+version = "8.2.3"
+description = "Retry code until it succeeds"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+doc = ["reno", "sphinx", "tornado (>=4.5)"]
 
 [[package]]
 name = "trame"
@@ -578,7 +617,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "2a80cdf61bbd898de02f29573f997a996921815b282c5bfd92203d1f078b41f8"
+content-hash = "403fb152df9852d8e3b633a653cbf50cff0aa8ec8c5b4a705a8937a604ba97d2"
 
 [metadata.files]
 aiohttp = []
@@ -606,8 +645,11 @@ matplotlib = []
 multidict = []
 numpy = []
 packaging = []
+pandas2 = []
 pillow = []
 platformdirs = []
+plotly = []
+plotter = []
 pooch = []
 pyparsing = []
 python-dateutil = []
@@ -616,6 +658,7 @@ requests = []
 scooby = []
 six = []
 sqlite4 = []
+tenacity = []
 trame = []
 trame-client = []
 trame-server = []

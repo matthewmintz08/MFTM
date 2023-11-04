@@ -13,6 +13,7 @@
       pkgs.glib
       # Needed for matplotlib
       pkgs.xorg.libX11
+      pkgs.xorg.libXrender
     ];
     PYTHONBIN = "${pkgs.python310Full}/bin/python3.10";
     LANG = "en_US.UTF-8";
